@@ -34,7 +34,7 @@ else:
     # Handle target environment that doesn't support HTTPS verification
     ssl._create_default_https_context = _create_unverified_https_context
 
-original_dataset_dir = "/Users/ambroseling/Desktop/TensorFlow/tensorflow-repo/Tensorflow/vol2-Computer-Vision/train"
+original_dataset_dir = "/Users/ambroseling/Desktop/TensorFlow/tensorflow-repo/Tensorflow/vol2-Computer-Vision/dogs_cats_original"
 
 base_dir = "/Users/ambroseling/Desktop/TensorFlow/tensorflow-repo/Tensorflow/vol2-Computer-Vision"
 
@@ -112,9 +112,3 @@ plt.title("Training and validation accuracy")
 plt.legend()
 plt.show()
 
-#=================
-model = models.Sequential()
-model.add(conv_base)
-model.add(layers.Flatten())
-model.add(layers.Dense(256,activation="relu"))
-model.add(layers.Dense(1,activation="sigmoid"))

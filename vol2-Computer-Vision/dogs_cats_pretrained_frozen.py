@@ -36,7 +36,7 @@ else:
 
 
 #STEP 1: orgnaize all the directories needed for training,validatoin and testing for both cats and dogs
-original_dataset_dir = "/Users/ambroseling/Desktop/TensorFlow/tensorflow-repo/Tensorflow/vol2-Computer-Vision/train"
+original_dataset_dir = "/Users/ambroseling/Desktop/TensorFlow/tensorflow-repo/Tensorflow/vol2-Computer-Vision/dogs_cats_original"
 
 base_dir = "/Users/ambroseling/Desktop/TensorFlow/tensorflow-repo/Tensorflow/vol2-Computer-Vision"
 
