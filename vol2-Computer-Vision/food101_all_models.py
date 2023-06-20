@@ -52,7 +52,7 @@ from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from helper_functions import plot_loss_curves,create_tensorboard_callback
 
 #======================MODEL 1: Feature Extraction transfer learning model with 10% of data augmentation======================
-
+# 83% accuracy
 train_dir_10_percent = "/Users/ambroseling/Desktop/TensorFlow/tensorflow-repo/Tensorflow/vol2-Computer-Vision/10_food_classes_10_percent/train"
 test_dir_10_percent = "/Users/ambroseling/Desktop/TensorFlow/tensorflow-repo/Tensorflow/vol2-Computer-Vision/10_food_classes_10_percent/test"
 train_dir_100_percent = "/Users/ambroseling/Desktop/TensorFlow/tensorflow-repo/Tensorflow/vol2-Computer-Vision/10_food_classes_all_data/train"
@@ -124,7 +124,7 @@ print("MODEL 1 EVALUATION:")
 model_1.evaluate(test_data_10_percent)
 
 #======================MODEL 2: Fine-tuning an existing model on 10% of data======================
-
+# 85% accuracy
 #To begin fine tuning , lets start by setting the last 10 layers of our base_model.trainable to True
 base_model.trainable = True
 
@@ -152,6 +152,7 @@ history_model_2 = model_1.fit(train_data_10_percent,
 print("MODEL 2 EVALUATION:")
 model_1.evaluate(test_data_10_percent)
 #======================MODEL 3: Fine-tuning an existing model on 10% of data======================
+# 87% accuracy
 train_data_10_classes_full = tf.keras.preprocessing.image_dataset_from_directory(train_dir_100_percent,
                                                                                  label_mode = "categorical",
                                                                                  image_size = IMG_size) 
