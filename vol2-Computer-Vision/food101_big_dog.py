@@ -43,7 +43,7 @@ sys.path.insert(1, '/Users/ambroseling/Desktop/TensorFlow/tensorflow-repo/Tensor
 import helper_functions
 
 #Walk thorugh 10 percent data directory and list number of files
-for dirpath,dirnames,filenames in os.walk("/Users/ambroseling/Desktop/TensorFlow/tensorflow-repo/Tensorflow/vol2-Computer-Vision/10_food_classes_10_percent"):
+for dirpath,dirnames,filenames in os.walk("/Users/ambroseling/Desktop/TensorFlow/tensorflow-repo/Tensorflow/vol2-Computer-Vision/101_food_classes_10_percent"):
   print(f"there are {len(dirnames)} directories and {len(filenames)} images in {dirpath}")
 
 
@@ -54,10 +54,10 @@ from helper_functions import plot_loss_curves,create_tensorboard_callback,compar
 
 #=========================MODEL 1: Big dog with transfer learning on 10% data=========================
 
-train_dir_10_percent = "/Users/ambroseling/Desktop/TensorFlow/tensorflow-repo/Tensorflow/vol2-Computer-Vision/10_food_classes_10_percent/train"
-test_dir_10_percent = "/Users/ambroseling/Desktop/TensorFlow/tensorflow-repo/Tensorflow/vol2-Computer-Vision/10_food_classes_10_percent/test"
-train_dir_100_percent = "/Users/ambroseling/Desktop/TensorFlow/tensorflow-repo/Tensorflow/vol2-Computer-Vision/10_food_classes_all_data/train"
-test_dir_100_percent = "/Users/ambroseling/Desktop/TensorFlow/tensorflow-repo/Tensorflow/vol2-Computer-Vision/10_food_classes_all_data/test"
+train_dir_10_percent = "/Users/ambroseling/Desktop/TensorFlow/tensorflow-repo/Tensorflow/vol2-Computer-Vision/101_food_classes_10_percent/train"
+test_dir_10_percent = "/Users/ambroseling/Desktop/TensorFlow/tensorflow-repo/Tensorflow/vol2-Computer-Vision/101_food_classes_10_percent/test"
+train_dir_100_percent = "/Users/ambroseling/Desktop/TensorFlow/tensorflow-repo/Tensorflow/vol2-Computer-Vision/101_food_classes_10_percent/train"
+test_dir_100_percent = "/Users/ambroseling/Desktop/TensorFlow/tensorflow-repo/Tensorflow/vol2-Computer-Vision/101_food_classes_10_percent/test"
 IMG_size = (224,224)
 train_data_10_percent = tf.keras.preprocessing.image_dataset_from_directory(train_dir_10_percent,
                                                                             label_mode = "categorical",
@@ -77,7 +77,7 @@ test_data_10_percent = tf.keras.preprocessing.image_dataset_from_directory(test_
 #Create checkpoint callback
 checkpoint_path = "ten_percent_model_checkpoints_weights_big_dog"
 checkpoint_callback = tf.keras.callbacks.ModelCheckpoint(checkpoint_path,
-                                                         save_weigjhts_only = True,
+                                                         save_weights_only = True,
                                                          monitor = "val_accuracy",
                                                          save_best_only=True)
 
@@ -90,7 +90,7 @@ data_augmentation = Sequential([
 ],name = "data_augmentation_layer")
 
 #Setup base model and freeze its layers (this will extract features)
-base_model  = tf.keras.applications.EfficientNetB0(include_top=False)
+base_model  = tf.keras.applications.EfficientNetB4(include_top=False)
 base_model.trainable = False
 
 #Set up model architecture with trainable top layer
@@ -105,7 +105,7 @@ model = tf.keras.Model(inputs,outputs)
 
 #compile the model
 model.compile(loss = "categorical_crossentropy",
-              optimizer = tf.keras.optimizers.Adam(),
+              optimizer = tf.keras.optimizers.legacy.Adam(),
               metrics = ["accuracy"])
 
 #Fit the model
@@ -115,7 +115,7 @@ history_model_1 = model.fit(train_data_10_percent,
                                            validation_steps = int(0.15*len(test_data_10_percent)),
                                            callbacks = [checkpoint_callback])
 
-moel_1_results = model.evaluate(test_data_10_percent)
+model_1_results = model.evaluate(test_data_10_percent)
 plot_loss_curves(history_model_1)
 plt.show()
 
@@ -190,6 +190,16 @@ for k,v in classification_report_dict.items():
 #Add class names and f1 scores to new dictionary
     class_f1_scores [class_names[int(k)]] = v["f1-score"]
 
-
+f1_scores = pd.DataFrame({"class_names":list(class_f1_scores.keys()),
+                          "f1_score": list(class_f1_scores.values())}).sort_values("f1_score",ascending=False)
+fig,ax = plt.subplots(figsize=(12,25))
+scores = ax.barh(range(len(f1_scores)),f1_scores["f1_score"].values)
+ax.set_yticks(range(len(f1_scores)))
+ax.set_yticklabels(f1_scores["class_names"])
+ax.set_xlabel("F1-score")
+ax.set_title("F1-scores for 101 Different Food Classes (predicted by food vision mini")
+ax.invert_yaxis(); #reverse the order of our plot
 
 plt.show()
+
+#Accuracy of 0.597

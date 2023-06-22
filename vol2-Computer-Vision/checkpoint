@@ -1,0 +1,2 @@
+model_checkpoint_path: "ten_percent_model_checkpoints_weights_big_dog"
+all_model_checkpoint_paths: "ten_percent_model_checkpoints_weights_big_dog"

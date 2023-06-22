@@ -10,6 +10,10 @@ from sklearn.compose import make_column_transformer
 from sklearn.preprocessing import MinMaxScaler,OneHotEncoder
 from sklearn.model_selection import train_test_split
 from keras.datasets import imdb
+
+#IMDB BINARY CLASSIFICATION
+
+
 #RUN WITH python3 binary_classification.py !!!! 
 
 # data = pd.read_csv("/Users/ambroseling/Desktop/TensorFlow/tensorflow-repo/Tensorflow/vol1-Fundamentals/breast-cancer.csv")
@@ -71,7 +75,7 @@ model.compile(loss = 'binary_crossentropy',
 history = model.fit(
     partial_x_train,
     partial_y_train,
-    epochs = 20,
+    epochs = 4,
     batch_size=512,
     validation_data=(x_val,y_val)
 )

@@ -11,6 +11,7 @@ from sklearn.preprocessing import MinMaxScaler,OneHotEncoder
 from sklearn.model_selection import train_test_split
 
 from sklearn.datasets import make_circles
+#CIRCLES BINARY CLASSIFICATION
 
 n_samples = 1000
 X,y = make_circles(n_samples,noise = 0.03, random_state=42)
