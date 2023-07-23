@@ -1,5 +1,5 @@
-# Tensorflow
-This is a repository for all the code I write to prepare for the Tensorflow developer certificate exam
+# Tensorflow Developer Certificate Repository
+This is a repository for all the code I wrote to prepare for the Tensorflow developer certificate exam
 
 ## Volume 1: Fundamentals (Simple Classification & Regression)
 
