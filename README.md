@@ -38,3 +38,5 @@ In this section, you shoudl be comfortable with tokens, tokenizers, text vectori
 
 ## Volume 4: Time Series & Sequential Analysis
 In this section, you shoudl know how to window your data, how to look at sequential data across a time period, how to sample sequential data at a frequency of your choice, how to prepare time-series data for sequence to sequence, sequence to vector, vector to vector, vector to sequence, what architectures to use, how to deal with seasonality and trends, how to forecast into the future based on past values, how to predict single-step or multi-step.
+
+In this repository there are a lot of code examples and just practice that I have done. I recommend trying them on your own and understanding the data yourself first because copying code rarely helps you learn and cement your understanding about the topic.So try it yourself with the data, my solutions may not be perfect and there are definitely ways I could improve but this is just a guideline of the types of practice that I think are useful.
